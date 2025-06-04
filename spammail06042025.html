@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta lang="en">
+    <title>MAIL</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+
+  <script>
+    var ids = new Map();
+
+    function fade(start, fin, direction, target, id){
+	var tag = id;
+	if (!ids.has(tag)){
+		ids.set(tag, null);
+	}
+	
+	var opacity= start;
+	clearInterval(ids.get(tag));
+	ids.set(tag, setInterval(frame, 1));
+	
+	function frame(){
+	if (opacity == fin){
+	    clearInterval(ids.get(tag));
+	    if (id == "letter"){
+		target.style.display = "none";
+	    }
+	}
+	else{
+		opacity += (2*direction);
+		target.style.opacity = (opacity * .01);
+	}
+}
+    }
+
+    function onBtClick(event){
+	//alert("works");
+	console.log("works");
+	let target=document.querySelector("#letter");
+	let fadein=document.querySelector("#page");
+	let letterflip = document.querySelector("#letterflip");
+	let letteropen = document.querySelector("#letteropen");
+
+	letterflip.muted = true;
+	letteropen.load();
+	letteropen.play();
+	fade(100, 0, -1, target, target.id);
+	fade(0, 100, 1, fadein, fadein.id);
+    }
+
+    function onBtMouseOut(event){
+	let audio=document.querySelector("#letterflip");
+	audio.load();
+	audio.play();
+    }
+    function onBtMouseOver(event){
+	let audio=document.querySelector("#letterflip");
+	audio.load();
+	audio.play();
+    }
+  </script>
+
+  <style>
+    #forwardaddress{
+	font-family:monospace;
+	font-size:16px;
+	margin-left:-30px;
+    }
+    #recieveraddress{
+	font-family:monospace;
+	font-size:16px;
+    }
+  </style>
+  
+  <body>
+    <h1>YOU'VE GOT MAIL</h1>
+    <audio autoplay>
+      <source src="./youGotmail.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="letterflip">
+      <source src="./letter_flipping.ogg" type="audio/ogg">
+    </audio>
+    <audio id="letteropen">
+      <source src="./paper_opening.ogg" type="audio/ogg">
+    </audio>
+    <script>
+      let audio = document.querySelector("#letterflip");
+      audio.volume = 0.2;
+    </script>
+    <div id="letter">
+
+      <div id="letterimg"></div>
+      <pre id="datestamp">
+	BLOOMSBURY MB 101
+	01 JUN 1975 PM 0 M
+	</pre>
+      <pre id="forwardaddress">
+	J.D. Associate 
+	National Vehicle Headquarters
+	320 E 14th Street
+	GLASTON, MB 21201
+      </pre>
+      <pre id="recieveraddress">
+	SOPHIE ADDAMS
+	116 TEALIFE DR
+	BLOOMSBURY, MB, 01209
+      </pre>
+      <button id="letterbt" onclick="onBtClick();" onmouseover="onBtMouseOver();" onmouseout="onBtMouseOut();"></button>
+    </div>
+
+    <div id="page">
+      <div id="dropshadow"></div>
+      <pre id="contents" style="font-size:13px;">
+	Dear Resident,
+
+	We've been trying to reach you concerning your vehicle's
+	extended warranty. You should've received a notice in the 
+	mail about your car's extended warranty eligibility. Since
+	we've not gotten a response, we're giving you a final
+	courtesy letter before we close out your file. your file.
+	your file. your file. your file. your file. your file.
+	You’ve been filed in one of hundreds of ugly rusty cabinets
+	lined one by one stacked across walls making terrible rotting
+	aisles toiling in an oxidizing egg-boiled musk and these
+	boxes are boxed in by bigger boxes of clean freshly painted
+	beige rooms that are in bigger boxes of shiny freshly plated
+	chrome monoliths in bigger boxes of stiff freshly cemented
+	grey boundaries in bigger boxes of freshly pumped and perfect
+	clouds in one big freshly polished glass clad polycarbonate
+	temperature controlled box. The callous Hands of the powers
+	that be manipulate the diorama with great granularity until
+	every whim and movement of each boxed in drone has been
+	programmed months in advance and this sickness at the core of
+	America spreads far and wide so that it’s the same in pine
+	wood framed windows of mom and pop shops than it is in steel
+	reinforced barred openings of a solitary confinement cell.
+	The Hands press and pull on strange buttons and handles that
+	push currents through wires in every corner of the United
+	States beneath the ground and above the streets and they tell
+	the ground to grow more condos to house artificial people
+	in artificial towns until the nation is an array of plasticine
+	society. Men eaten by their suits have their heads spit out
+	of their ties and legs spit out of their dress shoes so they
+	can still walk postmortem into congressional meetings and
+	carefully describe new and terrible punishments in tiny
+	unreadable paragraphs. I know, I’ve seen it. Opening someone
+	else’s mail is still a federal offense but that doesn’t mean
+	they won’t wear a loupe attached headgear with the flashlight
+	accessory and brandish a sub-100 BESS scoring double edge
+	letter opener and leave no trace. I know, I’ve seen that too.
+	Nixon is dead your thoughts are not your own do not surrender
+	they’re in the DOJ they’re in the DOC they’re in the interior
+	in the EPA the treasury NASA DOL OPM DOT DOE DOVA DOA DOS NSF
+	NARA DOL SSA FTC ATF NVH reserves the right to revoke your
+	eligibility for service coverage if you do not meet our
+	criteria. Respond within 5 days of receiving this parcel to
+	ensure eligibility.
+      </pre>
+    </div>
+    </body>
