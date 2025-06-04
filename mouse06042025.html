@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta lang="en">
+    <title>MAIL</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+
+  <script>
+    var ids = new Map();
+
+    function fade(start, fin, direction, target, id){
+	var tag = id;
+	if (!ids.has(tag)){
+		ids.set(tag, null);
+	}
+	
+	var opacity= start;
+	clearInterval(ids.get(tag));
+	ids.set(tag, setInterval(frame, 1));
+	
+	function frame(){
+	if (opacity == fin){
+	    clearInterval(ids.get(tag));
+	    if (id == "letter"){
+		target.style.display = "none";
+	    }
+	}
+	else{
+		opacity += (2*direction);
+		target.style.opacity = (opacity * .01);
+	}
+}
+    }
+
+    function onBtClick(event){
+	//alert("works");
+	console.log("works");
+	let target=document.querySelector("#letter");
+	let fadein=document.querySelector("#page");
+	let letterflip = document.querySelector("#letterflip");
+	let letteropen = document.querySelector("#letteropen");
+
+	letterflip.muted = true;
+	letteropen.load();
+	letteropen.play();
+	fade(100, 0, -1, target, target.id);
+	fade(0, 100, 1, fadein, fadein.id);
+    }
+
+    function onBtMouseOut(event){
+	let audio=document.querySelector("#letterflip");
+	audio.load();
+	audio.play();
+    }
+    function onBtMouseOver(event){
+	let audio=document.querySelector("#letterflip");
+	audio.load();
+	audio.play();
+    }
+  </script>
+  
+  <body>
+    <h1>YOU'VE GOT MAIL</h1>
+    <audio autoplay>
+      <source src="./youGotmail.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="letterflip">
+      <source src="./letter_flipping.ogg" type="audio/ogg">
+    </audio>
+    <audio id="letteropen">
+      <source src="./paper_opening.ogg" type="audio/ogg">
+    </audio>
+    <script>
+      let audio = document.querySelector("#letterflip");
+      audio.volume = 0.2;
+    </script>
+    <div id="letter">
+
+      <div id="letterimg"></div>
+      <pre id="datestamp">
+	BLOOMSBURY MB 101
+	05 JUN 1975 PM 0 M
+	</pre>
+      <pre id="forwardaddress">
+	THE MIRABURG VEHICLE
+	ASSOCIATION
+	10 SPROUT RUN RD
+	BLOOMSBURY, MB, 01209
+      </pre>
+      <pre id="recieveraddress">
+	MOSES DOE
+	1 LINON AVE
+	BLOOMSBURY, MB, 01209
+      </pre>
+      <button id="letterbt" onclick="onBtClick();" onmouseover="onBtMouseOver();" onmouseout="onBtMouseOut();"></button>
+    </div>
+
+    <div id="page">
+      <div id="dropshadow"></div>
+      <pre id="contents">
+	Dear MOSES DOE,
+
+	I hope this letter finds you well. The BLOOMSBURY MVA
+	branch is considering you for a position as an MVA OFFICE
+	INTERN. We request that you arrive for your interview at
+	10AM, June 6th with all materials prepared.
+
+	Yours truly,
+
+	The Miraburg Vehicle Association
+      </pre>
+    </div>
+    </body>
