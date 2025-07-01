@@ -74,6 +74,14 @@ pre{
     box-shadow:10px 10px 10px black;
 }
 
+#anthrax-guy{
+    width:30%;
+    position:absolute;
+    left:-40%;
+    top:25%;
+    
+}
+
 
 #letterbt{
     background-color:transparent;

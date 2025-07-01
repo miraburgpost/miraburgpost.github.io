@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta lang="en">
+    <title>MAIL</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+
+  <script>
+    var ids = new Map();
+
+    function fade(start, fin, direction, target, id){
+	var tag = id;
+	if (!ids.has(tag)){
+		ids.set(tag, null);
+	}
+	
+	var opacity= start;
+	clearInterval(ids.get(tag));
+	ids.set(tag, setInterval(frame, 1));
+	
+	function frame(){
+	if (opacity == fin){
+	    clearInterval(ids.get(tag));
+	    if (id == "letter"){
+		target.style.display = "none";
+	    }
+	}
+	else{
+		opacity += (2*direction);
+		target.style.opacity = (opacity * .01);
+	}
+}
+    }
+
+    function onBtClick(event){
+	//alert("works");
+	console.log("works");
+	let target=document.querySelector("#letter");
+	let fadein=document.querySelector("#page");
+	let letterflip = document.querySelector("#letterflip");
+	let letteropen = document.querySelector("#letteropen");
+
+	letterflip.muted = true;
+	letteropen.load();
+	letteropen.play();
+	fade(100, 0, -1, target, target.id);
+	fade(0, 100, 1, fadein, fadein.id);
+    }
+
+    function onBtMouseOut(event){
+	let audio=document.querySelector("#letterflip");
+	audio.load();
+	audio.play();
+    }
+    function onBtMouseOver(event){
+	let audio=document.querySelector("#letterflip");
+	audio.load();
+	audio.play();
+    }
+  </script>
+  
+  <body>
+    <h1>YOU'VE GOT MAIL</h1>
+    <audio autoplay>
+      <source src="./youGotmail.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="letterflip">
+      <source src="./letter_flipping.ogg" type="audio/ogg">
+    </audio>
+    <audio id="letteropen">
+      <source src="./paper_opening.ogg" type="audio/ogg">
+    </audio>
+    <script>
+      let audio = document.querySelector("#letterflip");
+      audio.volume = 0.2;
+    </script>
+    <div id="letter">
+
+      <div id="letterimg"></div>
+      <pre id="datestamp">
+	GLASTON MB 172
+	28 MAY 1975 PM 0 M
+	</pre>
+      <pre id="forwardaddress">
+	The Watering Mouth #0103
+	215 E Baum St,
+	GLaston, MB, 21201
+      </pre>
+      <pre id="recieveraddress">
+	Barb Lovendale
+	1 Linon Ave,
+	Bloomsbury, MB, 01209
+      </pre>
+      <button id="letterbt" onclick="onBtClick();" onmouseover="onBtMouseOver();" onmouseout="onBtMouseOut();"></button>
+    </div>
+
+    <div id="page">
+      <div id="dropshadow"></div>
+      <pre id="contents" style="font-size:13px;">
+	Dear Barb,
+
+	I hope this letter finds you well. I wanted to write to
+	you sooner but it’s been difficult finding a second
+	alone to do it. We made a deal and I didn’t hold up my end
+	of the bargain and I apologize and hope we can still work
+	things out. In spite of circumstances outside
+	of my control, the boat is currently in a storage unit and
+	I still got the key but I don’t trust that I could mail it
+	to you for what should be obvious reasons.
+
+	On the way to Glaston we passed Corona and it was every-
+	thing I heard it was. I remember when the city arrived
+	and my parents told me it was nonsense. That there’s no
+	beach to find driving west of the coast, but I saw it.
+	I was tired and it was late but the beaches were covered
+	in emeralds. I still wanted to go out into those chilly
+	waters but████ ████████ ███ ██ I was tired. I don’t know
+	why I’m telling you all this, I guess I never expected my-
+	self to be homesick. 
+
+	I should explain. I kept getting employee of the month be-
+	cause it wasn’t hard to get, I just did my job. I worked
+	for good tips but they still wanted to make me manager.
+	And I kept getting the store good numbers as a manger but
+	that was just because of the bonuses from cutting back on
+	labor and stock. I mean that was easy too. But then they
+	wanted me to become a district manager. I said fuck that.
+	I wasn’t going to give my life up to this job and these ██-
+	███ ███████ and I never intended on leaving so soon. But I
+	█████ ██ ████ ██ ███ ████ ████ ███ ██████ ████ ███████ ███
+	changed ██ ██ █████ ████ ██████ ██ ███ my mind ███████ ██-
+	█████ ███ ████ ███ I had to. ████ ████ ███ █ ████ ███████
+	███ ███ ███████ ████ ███████. ██████ ██ ███ ██ ███ ████
+	████ ████ ███████ █████████ ██████ ███ ███ ███ █████ █████
+	███ ██ ███ █ ████ ████████ ████. ███████ ██ █████████ ███
+	████ ████ ███ ████ ██ █ ██ ███ ██ █████ ███ ████ ███ ███ ███
+	████ was so tired. ███ ████ ██ █ █ █████ ███████ ██. ██-
+	███ ██ ██ ████ █████ ███ ████ ████ ███████ █████ █ ███ ████
+	█████ ███ ████ ████. █████████████. ████ █████. Please write
+	back soon or visit me at ███ ████ ██ ██ █████ ███████ ██ █████. 
+
+	Best,
+	Henry
+
+      </pre>
+      <img id="anthrax-guy" src="./anthrax_demon.gif"></img>
+    </div>
+    </body>
