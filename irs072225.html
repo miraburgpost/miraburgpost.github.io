@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta lang="en">
+    <title>MAIL</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+
+  <script>
+    var ids = new Map();
+
+    function fade(start, fin, direction, target, id){
+	var tag = id;
+	if (!ids.has(tag)){
+		ids.set(tag, null);
+	}
+	
+	var opacity= start;
+	clearInterval(ids.get(tag));
+	ids.set(tag, setInterval(frame, 1));
+	
+	function frame(){
+	if (opacity == fin){
+	    clearInterval(ids.get(tag));
+	    if (id == "letter"){
+		target.style.display = "none";
+	    }
+	}
+	else{
+		opacity += (2*direction);
+		target.style.opacity = (opacity * .01);
+	}
+}
+    }
+
+    function onBtClick(event){
+	//alert("works");
+	console.log("works");
+	let target=document.querySelector("#letter");
+	let fadein=document.querySelector("#page");
+	let letterflip = document.querySelector("#letterflip");
+	let letteropen = document.querySelector("#letteropen");
+
+	letterflip.muted = true;
+	letteropen.load();
+	letteropen.play();
+	fade(100, 0, -1, target, target.id);
+	fade(0, 100, 1, fadein, fadein.id);
+    }
+
+    function onBtMouseOut(event){
+	let audio=document.querySelector("#letterflip");
+	audio.load();
+	audio.play();
+    }
+    function onBtMouseOver(event){
+	let audio=document.querySelector("#letterflip");
+	audio.load();
+	audio.play();
+    }
+  </script>
+  
+  <body>
+    <h1>YOU'VE GOT MAIL</h1>
+    <audio autoplay>
+      <source src="./youGotmail.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="letterflip">
+      <source src="./letter_flipping.ogg" type="audio/ogg">
+    </audio>
+    <audio id="letteropen">
+      <source src="./paper_opening.ogg" type="audio/ogg">
+    </audio>
+    <script>
+      let audio = document.querySelector("#letterflip");
+      audio.volume = 0.2;
+    </script>
+    <div id="letter" style="font-family:monospace;">
+
+      <div id="letterimg"></div>
+      <pre id="datestamp">
+	BLOOMSBURY MB 101
+	04 JUN 1975 PM 0 M
+	</pre>
+      <pre id="forwardaddress">
+	USPS Office of the Consumer Advocate
+	67 N ST,
+	Kinderstreet Square, DC, 21201
+      </pre>
+      <pre id="recieveraddress">
+	JIM JENKINS
+	10 SOUTHCLIFF RD,
+	NEWFORD, DL, 20091
+      </pre>
+      <button id="letterbt" onclick="onBtClick();" onmouseover="onBtMouseOver();" onmouseout="onBtMouseOut();"></button>
+    </div>
+
+    <div id="page">
+      <div id="dropshadow"></div>
+      <pre id="contents">
+
+	INTERNAL REVENUE SERVICE
+	United States Department of The Treasury
+
+	                              Request Date: 06-11-1975
+	                              Response Date: 06-11-1975
+
+	FORM NUMBER: 0715             TAX PERIOD: DEC. 31 1974
+	
+	TAXPAYER IDENTIFICATION NUMBER:            xxx-xx-4890
+
+	16 KINDERSTREET SQUARE
+	DC, 21201
+	
+	Dear Taxpayer:
+
+	This letter responds to your failure to reply to one
+	or more urgent notices sent by the United States Postal
+	Service. Please read the following instructions and
+	comply in a timely manner or else face federal charges.
+			    
+			    WHAT YOU MUST QB
+
+	Ercbeg gb gur Oybbzfohel Cbfg Bssvpr jvgu gur qbphzragf
+	va lbhe nggvp jvguva gur arkg ohvfarff jrrx ng 8CZ. Vs
+	nqrdhrgr vasbezngv ba vf abg cebivqrq gura lbh jvyy or
+	rkcrpgrq gb znxr hc gur erznvaqre ivn jvguqenjy sebz lbhe
+	crefbany nppbhagf.
+
+	The other conditions of this agreement are:
+	confidentiality and discretion on the part of the
+	tax payer.
+
+	If you have questions or concerns, you can write to us
+	at the address shown at the beginning of this letter.
+
+	If you would prefer to fax, you can fax us at 180977713,
+	though if you do decide to fax, do not send your reply
+	concurrently by mail, as it will lead to a delay in
+	response.
+	
+      </pre>
+    </div>
+    </body>
